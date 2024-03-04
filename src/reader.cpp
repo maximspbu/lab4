@@ -1,5 +1,6 @@
 #include "reader.h"
 
+
 Reader::Reader(const std::string &filename):filename_(filename){
     file_.open(filename_);
     file_ >> vertices_count_ >> edges_count_;
@@ -18,6 +19,7 @@ std::vector<std::pair<size_t, size_t>> Reader::GetPairs(){
 size_t Reader::GetVerticiesCount(){
     return vertices_count_;
 }
+
 size_t Reader::GetEdgesCount(){
     return edges_count_;
 }

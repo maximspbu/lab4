@@ -1,5 +1,8 @@
 #ifndef WRITER_H
 #define WRITER_H
+
+#include "pixel.h"
+
 #include <cstddef>
 #include <stdint.h>
 #include <vector>
@@ -25,10 +28,7 @@
 // colors_used 0
 // colors_important 0
 
-//public
-//protected
-//private
-
+#pragma pack(push, 1)
 struct BMPFileHeader{
     uint16_t file_type{19778};
     uint32_t file_size{3966390};
@@ -55,13 +55,15 @@ struct BMPInfoHeader{
 
 class Writer{
     public:
-        Writer(const std::vector<uint8_t> &canvas);
+        Writer();
         void Write(const std::string &file_name);
         std::vector<uint8_t> Padding(int* row_stride);
+        void Convert(std::vector<std::vector<Pixel>> canvas);
     private:
         BMPFileHeader file_header_;
         BMPInfoHeader info_header_;
         std::vector<uint8_t> canvas_;
 };
+
 
 #endif //WRITER_H

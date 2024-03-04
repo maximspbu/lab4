@@ -1,15 +1,20 @@
-#ifndef DRAW_H
-#define DRAW_H
+#ifndef DRAWER_H
+#define DRAWER_H
+
+
+#include "pixel.h"
+
 #include <vector>
 #include <cstddef>
+#include <cmath>
+#include <iostream>
 
-class Draw{
-    private:
-        size_t sizeX, sizeY;
-        std::vector<std::vector<size_t>> canvas;
+
+class Drawer{
     public:
-        Draw(size_t sizeX_, size_t sizeY_);
-        void circle(size_t coordX, size_t coordY, size_t radius);
+        Drawer(size_t sizeX_, size_t sizeY_);
+        std::vector<std::vector<Pixel>> GetCanvas();
+        void circle(size_t coordX, size_t coordY, int radius);
         void line(size_t coordX1, size_t coordY1, size_t coordX2, size_t coordY2);
         void zero(size_t coordX, size_t coordY);
         void one(size_t coordX, size_t coordY);
@@ -21,7 +26,10 @@ class Draw{
         void seven(size_t coordX, size_t coordY);
         void eight(size_t coordX, size_t coordY);
         void nine(size_t coordX, size_t coordY);
-        
+    private:
+        size_t sizeX, sizeY;
+        std::vector<std::vector<Pixel>> canvas;
 };
 
-#endif //DRAW_H
+
+#endif //DRAWER_H
