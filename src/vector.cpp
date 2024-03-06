@@ -1,14 +1,14 @@
 #include "vector.h"
 
 
-Vector::Vector(int x, int y): x_(x), y_(y){};
+Vector::Vector(double x, double y): x_(x), y_(y){};
 
-Vector Vector::operator+(const Vector& point){
-    return Vector(x_ + point.x_, y_ + point.y_);
+Vector Vector::operator+(const Vector& v1){
+    return Vector(x_+v1.x_, y_+v1.y_);
 }
 
-Vector Vector::operator-(const Vector& point){
-    return Vector(x_ - point.x_, y_ - point.y_);
+Vector Vector::operator-(const Vector& v1){
+    return Vector(x_-v1.x_, y_-v1.y_);
 }
 
 Vector Vector::operator*(double m){
@@ -24,21 +24,21 @@ Vector Vector::operator/(double m){
 }
 
 double Vector::Distance(){
-    return pow(x_ * x_ + y_ * y_, 0.5);
+    return sqrt(x_ * x_ + y_ * y_);
 }
 
-int Vector::GetX(){
+double Vector::GetX(){
     return x_;
 }
 
-int Vector::GetY(){
+double Vector::GetY(){
     return y_;
 }
 
-void Vector::SetX(int x){
+void Vector::SetX(double x){
     x_=x;
 }
 
-void Vector::SetY(int y){
+void Vector::SetY(double y){
     y_=y;
 }

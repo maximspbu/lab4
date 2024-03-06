@@ -44,7 +44,7 @@ void Drawer::line(size_t coordX1, size_t coordY1, size_t coordX2, size_t coordY2
         dirY = -1;
     }
     for (size_t i = coordX1; i <= coordX2; ++i){
-        canvas[y][i].SetValues(255, 0, 0);
+        canvas[y][i].SetValues(0, 0, 255);
         error += deltaErr;
         if (error >= deltaX + 1){
             y += dirY;

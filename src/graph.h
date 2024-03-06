@@ -5,7 +5,6 @@
 #include "vector.h"
 
 
-#include <cstddef>
 #include <vector>
 #include <queue>
 #include <iostream>
@@ -24,24 +23,24 @@ struct Vertex{
 };
 
 class Graph{
+    public:
+        Graph(size_t vertices_count, size_t edges_count);
+        std::vector<size_t> BFS(size_t vertex_start, std::vector<size_t> verticies_end);
+        void AddEdges(const std::vector<std::pair<size_t, size_t>>& pairs);
+        void FruchtermanReingold(size_t area);
+        Vector RepulsiveForce(Vertex v1, Vertex v2);
+        Vector AttractiveForce(Vertex v1, Vertex v2);
+        std::vector<Vertex> GetVerticies();
     private:
-        size_t verticies_count_;
+        size_t vertices_count_;
         size_t edges_count_;
-        std::vector<bool> visited_;
         std::vector<Vertex> verticies_;
         std::vector<size_t> borders_;
-        double l_spring_ = 30.0;
-        double damping_ = 0.1;
-
-    public:
-        Graph(size_t verticies_count, size_t edges_count);
-        std::vector<size_t> BFS(size_t vertex_start, std::vector<size_t> verticies_end);
-        void AddVerticies(const std::vector<std::pair<size_t, size_t>>& pairs);
-        void DirectedForce(size_t epsilon, size_t max_iterations);
-        Vector RepulsiveForce(Vertex v1, Vertex v2);
-        Vector AttactiveForce(Vertex v1, Vertex v2);
-        std::vector<Vertex> GetVerticies();
+        double l_spring_;
+        const double cool_ = 0.9;
+        double temp;
+        const double c = 0.01;
+        const double tol = 0.001;
 };
-
 
 #endif //GRAPH_H
