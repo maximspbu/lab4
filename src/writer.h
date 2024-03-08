@@ -31,7 +31,7 @@
 #pragma pack(push, 1)
 struct BMPFileHeader{
     uint16_t file_type{19778};
-    uint32_t file_size{3966390};
+    uint32_t file_size{54};
     uint16_t reserved1{0};
     uint16_t reserved2{0};
     uint32_t offset_data{54};
@@ -40,8 +40,8 @@ struct BMPFileHeader{
 #pragma pack(push, 1)
 struct BMPInfoHeader{
     uint32_t size{40};
-    int32_t width{1408};
-    int32_t height{939};
+    int32_t width{0};
+    int32_t height{0};
     uint16_t planes{1};
     uint16_t bit_count{24};
     uint32_t compression{0};
@@ -55,14 +55,15 @@ struct BMPInfoHeader{
 
 class Writer{
     public:
-        Writer();
+        Writer(size_t width, size_t height);
         void Write(const std::string &file_name);
         std::vector<uint8_t> Padding(int* row_stride);
-        void Convert(std::vector<std::vector<Pixel>> canvas);
+        void Convert(const std::vector<std::vector<Pixel>>& canvas);
     private:
         BMPFileHeader file_header_;
         BMPInfoHeader info_header_;
         std::vector<uint8_t> canvas_;
+
 };
 
 

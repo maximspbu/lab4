@@ -15,7 +15,7 @@ class Drawer{
         Drawer(size_t sizeX_, size_t sizeY_);
         std::vector<std::vector<Pixel>> GetCanvas();
         void circle(size_t coordX, size_t coordY, int radius);
-        void line(size_t coordX1, size_t coordY1, size_t coordX2, size_t coordY2);
+        void line(int coordX1, int coordY1, int coordX2, int coordY2);
         void zero(size_t coordX, size_t coordY);
         void one(size_t coordX, size_t coordY);
         void two(size_t coordX, size_t coordY);

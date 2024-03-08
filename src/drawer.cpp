@@ -27,29 +27,35 @@ void Drawer::circle(size_t coordX, size_t coordY, int radius){
     }
 }
 
-void Drawer::line(size_t coordX1, size_t coordY1, size_t coordX2, size_t coordY2){
-    if (coordX1 > coordX2){
-        std::swap(coordX1, coordX2);
-        std::swap(coordY1, coordY2);
+void Drawer::line(int x0, int y0, int x1, int y1){
+    int dx = x1-x0;
+    int dy = y1-y0;
+    int xsign = dx>0?1:-1;
+    int ysign = dy>0?1:-1;
+    int xx, xy, yx, yy;
+    dx = abs(dx);
+    dy = abs(dy);
+    if (dx>dy){
+        xx = xsign;
+        xy = 0;
+        yx = 0;
+        yy = ysign;
+    } else {
+        std::swap(dx, dy);
+        xx = 0;
+        xy = ysign;
+        yx = xsign;
+        yy = 0;
     }
-    int deltaX = abs(coordX2 - coordX1);
-    int deltaY = abs(coordY2 - coordY1);
-    int error = 0;
-    int deltaErr = (deltaY + 1);
-    int y = coordY1;
-    int dirY = coordY2 - coordY1;
-    if (dirY > 0){
-        dirY = 1;
-    } else if (dirY < 0){
-        dirY = -1;
-    }
-    for (size_t i = coordX1; i <= coordX2; ++i){
-        canvas[y][i].SetValues(0, 0, 255);
-        error += deltaErr;
-        if (error >= deltaX + 1){
-            y += dirY;
-            error -= (deltaX + 1);
+    int d = 2*dy-dx;
+    int y = 0;
+    for (int x = 0; x < dx+1; ++x){
+        canvas[y0+x*xy+y*yy][x0+x*xx+y*yx].SetValues(0,0,0);
+        if (d>=0){
+            y+=1;
+            d -= 2*dx;
         }
+        d += 2*dy;
     }
 }
 

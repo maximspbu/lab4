@@ -7,23 +7,26 @@ int main(){
     Reader reader("../samples/sample1.txt");
     Graph graph(reader.GetVerticiesCount(), reader.GetEdgesCount());
     graph.AddEdges(reader.GetPairs());
-    size_t width, height;
-    width = 100;
-    height = 100;
-    graph.FruchtermanReingold(width*height);
-    //std::vector<Vertex> result = graph.GetVerticies();
-    // Drawer drawer(width, height);
-    // for (size_t i = 0; i < result.size(); ++i){
-    //     for (size_t j = 0; j < result[i].next_.size(); ++j){
-    //         drawer.line(result[i].position.GetX(), result[i].position.GetY(), result[i].next_[j]->position.GetX(), result[i].next_[j]->position.GetY());
-    //     }
-    // }
-    // for (size_t i = 0; i < result.size(); ++i){
-    //     drawer.circle(result[i].position.GetX(), result[i].position.GetY(), 10);
-    // }
-    // Writer writer;
-    // writer.Convert(drawer.GetCanvas());
-    // std::string file_name = "../result/test3.bmp";
-    // writer.Write(file_name);
+    size_t width, height, radius;
+    width = 100*floor(sqrt(reader.GetVerticiesCount()));
+    height = width;
+    radius = 10;
+    size_t max_iterations = 100;
+    graph.FruchtermanReingold(width, height, radius + 5, max_iterations);
+    //graph.Walshaw(width, height, radius + 5);
+    std::vector<Vertex> result = graph.GetVerticies();
+    Drawer drawer(width, height);
+    for (Vertex& vertex: result){
+        for (Vertex* next_vertex: vertex.next_){
+            drawer.line(vertex.position.GetX(), vertex.position.GetY(), next_vertex->position.GetX(), next_vertex->position.GetY());
+        }
+    }
+    for (Vertex& vertex: result){
+        drawer.circle(vertex.position.GetX(), vertex.position.GetY(), radius);
+    }
+    Writer writer(width, height);
+    writer.Convert(drawer.GetCanvas());
+    std::string file_name = "../result/test3.bmp";
+    writer.Write(file_name);
     return 0;
 }

@@ -24,7 +24,7 @@ Vector Vector::operator/(double m){
 }
 
 double Vector::Distance(){
-    return sqrt(x_ * x_ + y_ * y_);
+    return sqrt(x_ * x_ + y_ * y_)+0.0000001;
 }
 
 double Vector::GetX(){
@@ -41,4 +41,11 @@ void Vector::SetX(double x){
 
 void Vector::SetY(double y){
     y_=y;
+}
+
+Vector Vector::Normalize(){
+    double distance = Distance();
+    x_ /= distance;
+    y_ /= distance;
+    return Vector(x_, y_);
 }

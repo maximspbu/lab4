@@ -20,6 +20,7 @@ class Vector{
         void SetX(double x);
         void SetY(double y);
         double Distance();
+        Vector Normalize();
     private:
         double x_;
         double y_;
