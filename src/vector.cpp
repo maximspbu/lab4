@@ -4,11 +4,11 @@
 Vector::Vector(double x, double y): x_(x), y_(y){};
 
 Vector Vector::operator+(const Vector& v1){
-    return Vector(x_+v1.x_, y_+v1.y_);
+    return Vector(x_ + v1.x_, y_ + v1.y_);
 }
 
 Vector Vector::operator-(const Vector& v1){
-    return Vector(x_-v1.x_, y_-v1.y_);
+    return Vector(x_ - v1.x_, y_ - v1.y_);
 }
 
 Vector Vector::operator*(double m){
@@ -24,7 +24,7 @@ Vector Vector::operator/(double m){
 }
 
 double Vector::Distance(){
-    return sqrt(x_ * x_ + y_ * y_)+0.0000001;
+    return sqrt(x_ * x_ + y_ * y_) + 0.0000001;
 }
 
 double Vector::GetX(){
@@ -36,11 +36,11 @@ double Vector::GetY(){
 }
 
 void Vector::SetX(double x){
-    x_=x;
+    x_ = x;
 }
 
 void Vector::SetY(double y){
-    y_=y;
+    y_ = y;
 }
 
 Vector Vector::Normalize(){

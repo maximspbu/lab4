@@ -1,5 +1,5 @@
-#ifndef WRITER_H
-#define WRITER_H
+#ifndef BMP_H
+#define BMP_H
 
 #include "pixel.h"
 
@@ -9,24 +9,6 @@
 #include <fstream>
 #include <string>
 
-// BMPFileHeader:
-// file_type 19778
-// file_size 3966390
-// reserved1 0
-// reserved2 0
-// offset_data 54
-// BMPInfoHeader:
-// info_header 40
-// width 1408
-// height 939
-// planes 1
-// bit_count 24
-// compression 0
-// size_image 0
-// x_pixels_per_meter 3780
-// y_pixels_per_meter 3780
-// colors_used 0
-// colors_important 0
 
 #pragma pack(push, 1)
 struct BMPFileHeader{
@@ -53,18 +35,22 @@ struct BMPInfoHeader{
 };
 #pragma pack(pop)
 
-class Writer{
+class Bmp{
     public:
-        Writer(size_t width, size_t height);
+        Bmp(size_t width, size_t height);
         void Write(const std::string &file_name);
         std::vector<uint8_t> Padding(int* row_stride);
         void Convert(const std::vector<std::vector<Pixel>>& canvas);
+        std::vector<std::vector<Pixel>> Read(const std::string &file_name);
+        std::vector<std::vector<std::vector<Pixel>>> GetDigits();
     private:
         BMPFileHeader file_header_;
         BMPInfoHeader info_header_;
+        BMPFileHeader read_file_header_;
+        BMPInfoHeader read_info_header_;
         std::vector<uint8_t> canvas_;
-
+        std::vector<std::vector<std::vector<Pixel>>> digits_;
 };
 
 
-#endif //WRITER_H
+#endif //BMP_H
