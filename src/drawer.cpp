@@ -14,18 +14,18 @@ std::vector<std::vector<Pixel>> Drawer::GetCanvas(){
     return canvas_;
 }
 
-void Drawer::Circle(int coordX, int coordY, int radius){
+void Drawer::Circle(size_t x, size_t y, int radius){
     for (int i = -radius; i < radius + 1; ++i){
         for (int j = -radius; j < radius + 1; ++j){
             if (i*i + j*j <= radius*radius){
-                canvas_[coordY + i][coordX + j].SetValues(255, 0, 0);
+                canvas_[y + i][x + j] = {255, 0, 0};
                 
             }
         }
     }
 }
 
-void Drawer::Line(int x0, int y0, int x1, int y1){
+void Drawer::Line(size_t x0, size_t y0, size_t x1, size_t y1){
     int dx = x1 - x0;
     int dy = y1 - y0;
     int xsign = dx > 0? 1: -1;
@@ -48,7 +48,7 @@ void Drawer::Line(int x0, int y0, int x1, int y1){
     int d = 2*dy - dx;
     int y = 0;
     for (int x = 0; x < dx + 1; ++x){
-        canvas_[y0 + x*xy + y*yy][x0 + x*xx + y*yx].SetValues(0, 0, 0);
+        canvas_[y0 + x*xy + y*yy][x0 + x*xx + y*yx] = {0, 0, 0};
         if (d >= 0){
             y++;
             d -= 2*dx;
@@ -57,22 +57,24 @@ void Drawer::Line(int x0, int y0, int x1, int y1){
     }
 }
 
-void Drawer::Num(int x, int y, int number){
+void Drawer::Num(size_t x, size_t y, size_t number){
     int step = log10(number);
     int remains;
     while (step > -1){
         remains = number/static_cast<int>(pow(10, step))%10;
         Digit(x, y, remains);
         step--;
-        x += 16;
+        x += 10;
     }
 }
 
-void Drawer::Digit(int x, int y, int digit){
+void Drawer::Digit(size_t x, size_t y, size_t digit){
     for (size_t i = 0; i < digits_[digit].size(); ++i){
         for (size_t j = 0; j < digits_[digit][i].size(); ++j){
-            if ((digits_[digit][i][j].blue_==255)&&(digits_[digit][i][j].green_==255)&&(digits_[digit][i][j].red_==255)) continue;
-            canvas_[y+i][x+j] = digits_[digit][i][j];
+            if ((digits_[digit][i][j].blue_==255)&&(digits_[digit][i][j].green_==255)&&(digits_[digit][i][j].red_==255)){
+                continue;
+            }
+            canvas_[y+i][x+j] = {digits_[digit][i][j].blue_, digits_[digit][i][j].green_, digits_[digit][i][j].red_}; //digits_[digit][i][j].blue_, digits_[digit][i][j].green_, digits_[digit][i][j].red_
         }
     }
 }

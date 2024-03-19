@@ -1,5 +1,6 @@
 #include "vector.h"
 
+Vector::Vector():x_(0), y_(0){};
 
 Vector::Vector(double x, double y): x_(x), y_(y){};
 

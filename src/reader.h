@@ -11,16 +11,15 @@
 class Reader{
     public:
         Reader(const std::string &filename);
-        std::vector<std::pair<size_t, size_t>> GetPairs();
+        std::vector<std::pair<size_t, size_t>> GetEdges();
         size_t GetVerticiesCount();
         size_t GetEdgesCount();
 
     private:
         std::string filename_;
         std::ifstream file_;
-        size_t vertices_count_, edges_count_;
-        std::vector<std::pair<size_t, size_t>> pairs_;
+        size_t verticesCount_, edgesCount_;
+        std::vector<std::pair<size_t, size_t>> edges_;
 };
-
 
 #endif //READER_H

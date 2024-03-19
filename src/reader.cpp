@@ -3,23 +3,23 @@
 
 Reader::Reader(const std::string &filename):filename_(filename){
     file_.open(filename_);
-    file_ >> vertices_count_ >> edges_count_;
+    file_ >> verticesCount_ >> edgesCount_;
     size_t vertex1, vertex2;
-    for (size_t e = 0; e < edges_count_; ++e){
+    for (size_t e = 0; e < edgesCount_; ++e){
         file_ >> vertex1 >> vertex2;
-        pairs_.emplace_back(vertex1, vertex2);
+        edges_.emplace_back(vertex1, vertex2);
     }
     file_.close();
 }
 
-std::vector<std::pair<size_t, size_t>> Reader::GetPairs(){
-    return pairs_;
+std::vector<std::pair<size_t, size_t>> Reader::GetEdges(){
+    return edges_;
 }
 
 size_t Reader::GetVerticiesCount(){
-    return vertices_count_;
+    return verticesCount_;
 }
 
 size_t Reader::GetEdgesCount(){
-    return edges_count_;
+    return edgesCount_;
 }

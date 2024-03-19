@@ -44,10 +44,10 @@ class Bmp{
         std::vector<std::vector<Pixel>> Read(const std::string &file_name);
         std::vector<std::vector<std::vector<Pixel>>> GetDigits();
     private:
-        BMPFileHeader file_header_;
-        BMPInfoHeader info_header_;
-        BMPFileHeader read_file_header_;
-        BMPInfoHeader read_info_header_;
+        BMPFileHeader fileHeader_;
+        BMPInfoHeader infoHeader_;
+        BMPFileHeader readFileHeader_;
+        BMPInfoHeader readInfoHeader_;
         std::vector<uint8_t> canvas_;
         std::vector<std::vector<std::vector<Pixel>>> digits_;
 };
